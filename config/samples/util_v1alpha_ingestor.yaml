@@ -1,0 +1,9 @@
+apiVersion: util.github.com/v1alpha
+kind: Ingestor
+metadata:
+  labels:
+    app.kubernetes.io/name: k8s-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: ingestor-sample
+spec:
+  # TODO(user): Add fields here
