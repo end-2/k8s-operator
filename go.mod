@@ -1,6 +1,6 @@
 module github.com/end-2
 
-go 1.23.0
+go 1.24.2
 
 godebug default=go1.23
 
