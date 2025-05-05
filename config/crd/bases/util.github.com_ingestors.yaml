@@ -39,13 +39,32 @@ spec:
           spec:
             description: IngestorSpec defines the desired state of Ingestor.
             properties:
-              foo:
-                description: Foo is an example field of Ingestor. Edit ingestor_types.go
-                  to remove/update
+              destination:
+                properties:
+                  accessKey:
+                    type: string
+                  bucketName:
+                    type: string
+                  endpoint:
+                    type: string
+                  objectPrefix:
+                    type: string
+                  region:
+                    type: string
+                  secretKey:
+                    type: string
+                type: object
+              interval:
+                type: string
+              sourceNamespace:
                 type: string
             type: object
           status:
             description: IngestorStatus defines the observed state of Ingestor.
+            properties:
+              lastIngested:
+                format: date-time
+                type: string
             type: object
         type: object
     served: true

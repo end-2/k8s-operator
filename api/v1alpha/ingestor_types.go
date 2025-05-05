@@ -28,14 +28,27 @@ type IngestorSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Ingestor. Edit ingestor_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	SourceNamespace string          `json:"sourceNamespace,omitempty"`
+	Destination     Destination     `json:"destination,omitempty"`
+	Interval        metav1.Duration `json:"interval,omitempty"`
+}
+
+type Destination struct {
+	Endpoint     string `json:"endpoint,omitempty"`
+	Region       string `json:"region,omitempty"`
+	BucketName   string `json:"bucketName,omitempty"`
+	ObjectPrefix string `json:"objectPrefix,omitempty"`
+	AccessKey    string `json:"accessKey,omitempty"`
+	SecretKey    string `json:"secretKey,omitempty"`
 }
 
 // IngestorStatus defines the observed state of Ingestor.
 type IngestorStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+
+	// +kubebuilder:validation:Format=date-time
+	LastIngested metav1.Time `json:"lastIngested,omitempty"`
 }
 
 // +kubebuilder:object:root=true
