@@ -1,0 +1,35 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: cluster-000
+nodes:
+- role: control-plane
+  image: kindest/node:v1.32.0@sha256:c48c62eac5da28cdadcf560d1d8616cfa6783b58f0d94cf63ad1bf49600cb027
+  extraPortMappings:
+    - containerPort: 30010
+      hostPort: 8010
+    - containerPort: 30020
+      hostPort: 8020
+    - containerPort: 30030
+      hostPort: 8030
+    - containerPort: 30040
+      hostPort: 8040
+    - containerPort: 30050
+      hostPort: 8050
+    - containerPort: 30060
+      hostPort: 8060
+    - containerPort: 30070
+      hostPort: 8070
+    - containerPort: 30080
+      hostPort: 8080
+    - containerPort: 30090
+      hostPort: 8090
+  extraMounts:
+    - hostPath: {{ .Env.HOME }}/.docker/config.json
+      containerPath: /var/lib/kubelet/config.json
+      readOnly: true
+- role: worker
+  image: kindest/node:v1.32.0@sha256:c48c62eac5da28cdadcf560d1d8616cfa6783b58f0d94cf63ad1bf49600cb027
+  extraMounts:
+    - hostPath: {{ .Env.HOME }}/.docker/config.json
+      containerPath: /var/lib/kubelet/config.json
+      readOnly: true
