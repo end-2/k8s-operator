@@ -27,3 +27,4 @@ go.work
 *~
 
 test/setup/kind/cluster.yaml
+.DS_Store

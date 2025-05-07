@@ -1,0 +1,43 @@
+repositories:
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    url: https://grafana.github.io/helm-charts
+  - name: influxdata
+    url: https://helm.influxdata.com
+
+releases:
+  - name: kube-prometheus-stack
+    namespace: monitoring
+    chart: ./helm/kube-prometheus-stack
+    values:
+      - values/kube-prometheus-stack-values.yaml
+
+  - name: k6-operator
+    namespace: monitoring
+    chart: ./helm/k6-operator
+    values:
+      - values/k6-operator-values.yaml
+
+  - name: grafana-operator 
+    namespace: monitoring
+    chart: ./helm/grafana-operator
+    values:
+      - values/grafana-operator-values.yaml
+
+  - name: influxdb2
+    namespace: monitoring
+    chart: ./helm/influxdb2
+    values:
+      - values/influxdb2-values.yaml
+
+  - name: grafana-crs
+    namespace: monitoring
+    chart: ./helm/grafana-crs
+    needs:
+      - kube-prometheus-stack
+      - influxdb2
+      - grafana-operator
+
+helmDefaults:
+  createNamespace: true
